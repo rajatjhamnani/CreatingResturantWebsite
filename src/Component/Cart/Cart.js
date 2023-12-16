@@ -1,21 +1,46 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import classes from "./Cart.module.css";
 import Modal from "../UI/Modal";
+import CartContext from "../../store/Cart-context";
+
 const Cart = (props) => {
+  const [totalAmount, setTotalAmount] = useState(0);
+  const cartCtx = useContext(CartContext);
+
+  useEffect(() => {
+    const calculateTotalAmount = () => {
+      const amount = cartCtx.items.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+      }, 0);
+      setTotalAmount(amount);
+    };
+
+    calculateTotalAmount();
+  }, [cartCtx.items]);
+
   const CartItems = (
     <ul className={classes["cart-items"]}>
-      {[{ id: "c1", name: "Sushi", amount: 2, price: 12.99 }].map((item) => (
-        <li>{item.name}</li>
+      {cartCtx.items.map((item) => (
+        <li key={item.id}>
+          Name: {item.name}, Price: {item.price}, Quantity: {item.quantity}
+        </li>
       ))}
     </ul>
   );
+
+  // const handleOrder = () => {
+  //   // Logic for placing an order with the items in the cart
+  //   // This is where you might send a request to a server or take further action
+  //   // For now, let's just log a message
+  //   console.log("Order placed!");
+  // };
 
   return (
     <Modal onClose={props.onClose}>
       {CartItems}
       <div className={classes.total}>
         <span>Total amount</span>
-        <span>35.62</span>
+        <span>{totalAmount}</span>
       </div>
       <div className={classes.actions}>
         <button className={classes["button--alt"]} onClick={props.onClose}>
@@ -26,4 +51,5 @@ const Cart = (props) => {
     </Modal>
   );
 };
+
 export default Cart;
