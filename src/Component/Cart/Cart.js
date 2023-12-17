@@ -21,9 +21,23 @@ const Cart = (props) => {
   const CartItems = (
     <ul className={classes["cart-items"]}>
       {cartCtx.items.map((item) => (
-        <li key={item.id}>
-          Name: {item.name}, Price: {item.price}, Quantity: {item.quantity}
-        </li>
+        <div className={classes["item-actions"]}>
+          <li key={item.id}>
+            Name: {item.name}, Price: {item.price}
+            <space>-------------</space>
+            <button
+              onClick={() => {
+                cartCtx.removeItem(item.id, item.name);
+              }}
+            >
+              -
+            </button>
+            Quantity: {item.quantity}
+            <button onClick={() => cartCtx.addItem({ ...item, quantity: 1 })}>
+              +
+            </button>
+          </li>
+        </div>
       ))}
     </ul>
   );
