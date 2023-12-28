@@ -4,26 +4,26 @@ import Card from "../UI/Card";
 const DUMMY_MEALS = [
   {
     id: "m1",
-    name: "Sushi",
+    name: "Sushii",
     description: "Finest fish and veggies",
     price: 22.99,
   },
   {
     id: "m2",
-    name: "Schnitzel",
+    name: "Pizzaa",
     description: "A german specialty!",
     price: 16.5,
   },
   {
     id: "m3",
-    name: "Barbecue Burger",
+    name: "Burger",
     description: "American, raw, meaty",
     price: 12.99,
   },
   {
     id: "m4",
-    name: "Green Bowl",
-    description: "Healthy...and green...",
+    name: "Paneer",
+    description: "Healthy...and milky...",
     price: 18.99,
   },
 ];

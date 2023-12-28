@@ -20,17 +20,18 @@ const CartProvider = (props) => {
     setItems((prevItems) => {
       const updatedItems = prevItems.map((item) => {
         if (item.id === itemId && item.name === itemName) {
-          if (item.quantity === 1) {
-            return null;
-          } else {
-            return { ...item, quantity: item.quantity - 1 };
-          }
+          return { ...item, quantity: item.quantity - 1 };
         }
         return item;
       });
 
-      return updatedItems;
+      const filteredItems = updatedItems.filter((item) => item.quantity > 0);
+
+      return filteredItems;
     });
+  };
+  const clearCartHandler = () => {
+    setItems([]);
   };
 
   const cartContext = {
@@ -38,6 +39,7 @@ const CartProvider = (props) => {
     totalAmount: 0,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    clearCart: clearCartHandler,
   };
 
   return (

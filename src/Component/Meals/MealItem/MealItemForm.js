@@ -10,12 +10,14 @@ const MealItemForm = (props) => {
 
   const handleInputChange = (event) => {
     setQuantity(Number(event.target.value));
+    //console.log("AAA", event.target.value);
   };
 
   const addItemToCart = (event) => {
     event.preventDefault();
 
     cartContext.addItem({ ...props.item, quantity: quantity });
+    setQuantity(1);
   };
 
   return (
